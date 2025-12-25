@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>System Alert</title>
+  <style>
+    body {
+      background:black;
+      color:#00ff00;
+      font-family: monospace;
+      padding:20px;
+    }
+    h1 {
+      text-align:center;
+      animation: blink 1s infinite;
+    }
+    @keyframes blink { 50% {opacity:0;} }
+
+    button {
+      display:block;
+      margin:20px auto;
+      padding:10px 20px;
+      background:red;
+      color:white;
+      border:none;
+      font-size:16px;
+    }
+
+    #console {
+      margin-top:20px;
+      border:1px solid #00ff00;
+      padding:10px;
+      height:200px;
+      overflow:auto;
+      font-size:14px;
+    }
+
+    .bar {
+      width:100%;
+      background:#003300;
+      margin-top:10px;
+    }
+    .progress {
+      width:0%;
+      height:15px;
+      background:#00ff00;
+    }
+  </style>
+</head>
+<body>
+
+<h1>⚠ SYSTEM BREACH ⚠</h1>
+<p style="text-align:center">Unauthorized access detected</p>
+
+<button onclick="startPrank()">FIX NOW</button>
+
+<div class="bar">
+  <div class="progress" id="progress"></div>
+</div>
+
+<div id="console"></div>
+
+<script>
+const logs = [
+  "Initializing system scan...",
+  "Accessing kernel modules...",
+  "Decrypting security layer...",
+  "Firewall bypassed...",
+  "Extracting system data...",
+  "Uploading logs to server...",
+  "CRITICAL: System unstable!"
+];
+
+function startPrank() {
+
+  // 🔊 Built-in beep (no mp3)
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const osc = ctx.createOscillator();
+  osc.type = "square";
+  osc.frequency.value = 900;
+  osc.connect(ctx.destination);
+  osc.start();
+  setTimeout(()=>osc.stop(),1200);
+
+  // 📳 Vibration
+  if(navigator.vibrate){
+    navigator.vibrate([300,200,300,200,300]);
+  }
+
+  let i = 0;
+  let prog = 0;
+  const consoleBox = document.getElementById("console");
+  const bar = document.getElementById("progress");
+
+  const interval = setInterval(()=>{
+    if(i < logs.length){
+      consoleBox.innerHTML += "> " + logs[i] + "<br>";
+      consoleBox.scrollTop = consoleBox.scrollHeight;
+      i++;
+      prog += 15;
+      bar.style.width = prog + "%";
+    } else {
+      clearInterval(interval);
+      setTimeout(()=>{
+        alert("SYSTEM FAILURE!\nDevice at risk!");
+      },500);
+    }
+  },800);
+}
+</script>
+
+</body>
+</html>
